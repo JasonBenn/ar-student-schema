@@ -33,7 +33,21 @@ task "db:version" do
   puts "Current version: #{ActiveRecord::Migrator.current_version}"
 end
 
-desc "Run the specs"
+desc "Mess around with student age and name methods"
+task "db:play" do
+  stud = Student.first  
+  p stud.name
+  p stud.age
+end
+
+desc "Open an IRB session w everything loaded"
+task "irb" do
+  require 'irb'
+  ARGV.clear
+  IRB.start
+end
+
+
 RSpec::Core::RakeTask.new(:specs)
 
 task :default  => :specs
