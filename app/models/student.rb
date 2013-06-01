@@ -5,8 +5,8 @@ class Student < ActiveRecord::Base
     format: { with: /.+@.+\...+/ },
     uniqueness: true
   validates :age, numericality: { greater_than: 5 }
-  
   validate :phone_number
+  belongs_to :teacher
 
   def name
     first_name + ' ' + last_name

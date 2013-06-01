@@ -2,7 +2,7 @@ require 'rake'
 require 'rspec/core/rake_task'
 require_relative 'db/config'
 require_relative 'lib/students_importer'
-
+require_relative 'app/application'
 
 desc "create the database"
 task "db:create" do
@@ -28,6 +28,11 @@ task "db:populate" do
   StudentsImporter.import
 end
 
+desc "seeds my own database"
+task "db:seed" do
+  require_relative 'db/seeds'
+end
+
 desc 'Retrieves the current schema version number'
 task "db:version" do
   puts "Current version: #{ActiveRecord::Migrator.current_version}"
@@ -41,10 +46,8 @@ task "db:play" do
 end
 
 desc "Open an IRB session w everything loaded"
-task "irb" do
-  require 'irb'
-  ARGV.clear
-  IRB.start
+task "console" do
+  exec "irb"
 end
 
 
